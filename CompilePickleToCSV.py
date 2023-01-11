@@ -24,7 +24,7 @@ for index, filename in enumerate(os.listdir(picklesfolder_path)):
 
     if index == 0:
         Headings = ['letter']
-        for i in range(0,len(timeline[0])):# create headings for the amount of elements in a frame of data
+        for i in range(0,len(timeline[0])):
             Headings.append("unit-"+str(i))
         WriteNewCSVLine(Headings)
 
