@@ -27,7 +27,7 @@ def ASL_guess():
         if game_status == True:
             while True:
                     success, image = cap.read()
-                    #print(letters2learn)
+                  
                     
                     if len(letters2learn) == 0:
                         cv2.destroyAllWindows()
@@ -53,12 +53,7 @@ def ASL_guess():
                                 break
             cv2.destroyAllWindows()
 
-    #retVal.result = 0
-    #while True:
-    #    retVal.result += 1
-
-#https://stackoverflow.com/a/53555027/13868464
-
+   
 guess_thread = threading.Thread(target = ASL_guess, name = 'ASL guesser')
 timer_thread = threading.Thread(target = start_timer, name = 'Timer')
 
