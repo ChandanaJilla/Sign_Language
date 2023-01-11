@@ -9,18 +9,17 @@ import HandDataCollecter
 import mediapipe as mp
 import numpy as np
 
-########Initialise random forest
 
 local_path = (os.path.dirname(os.path.realpath('__file__')))
 
-file_name = ('ASL-Data.csv')#file of total data
+file_name = ('ASL-Data.csv')
 data_path = os.path.join(local_path,file_name)
 print (data_path)
 df = pd.read_csv(r''+data_path)
 
 print (df)
 
-units_in_data = 28 #no. of units in data
+units_in_data = 28 
 
 titles = []
 for i in range(units_in_data):
@@ -31,12 +30,12 @@ y = df['letter']
 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.5,random_state=2)
 
-clf = RandomForestClassifier(n_estimators=30)#random forest
+clf = RandomForestClassifier(n_estimators=30)
 clf.fit(X_train,y_train)
 y_pred = clf.predict(X_test)
 print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
 
-#########Begin predictions
+
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
@@ -57,17 +56,9 @@ if __name__ == '__main__':
             success, image = cap.read()
             if not success:
                         print("Ignoring empty camera frame.")
-                        # If loading a video, use 'break' instead of 'continue'.
+                      
                         continue
 
-            '''ImageData = HandDataCollecter.ImageToDistanceData(image, hands)
-            DistanceData = ImageData['Distance-Data']
-            image = ImageData['image']
-
-            if cv2.waitKey(1) & 0xFF == 32:
-                prediction = clf.predict([DistanceData])
-                SpelledWord = str(prediction[0])
-                #print(SpelledWord)'''
 
             try:
                 SpelledWord = get_prediction(image)
@@ -80,7 +71,7 @@ if __name__ == '__main__':
 
             cv2.imshow('frame', image)
                 
-            if cv2.waitKey(5) & 0xFF == 27: #press escape to break
+            if cv2.waitKey(5) & 0xFF == 27:
                         break
     
     cap.release()
